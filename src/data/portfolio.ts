@@ -163,7 +163,7 @@ export const projects = [
     ],
     results:
       "Optimized chunking and embedding strategy to improve retrieval precision.",
-    github: "YOUR_GITHUB_LINK",
+    github: "https://github.com/amanparganiha/Event-Driven-RAG-Agent",
   },
   {
     id: "2",
@@ -182,7 +182,7 @@ export const projects = [
     ],
     results:
       "Built scalable multimodal dataset and evaluated multiple ML models.",
-    github: "YOUR_GITHUB_LINK",
+    github: "https://github.com/amanparganiha/FDA-10-Multimodal-Credit-Risk-Analysis",
   },
 ];
 
