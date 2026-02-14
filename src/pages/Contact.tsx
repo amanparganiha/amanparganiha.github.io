@@ -22,12 +22,40 @@ const Contact = () => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
-    setForm({ name: "", email: "", message: "" });
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  try {
+    const response = await fetch("https://formspree.io/f/xreaqpwp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      }),
+    });
+
+    if (response.ok) {
+      toast({
+        title: "Message sent! ✅",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      setForm({ name: "", email: "", message: "" });
+    } else {
+      toast({
+        title: "Failed to send ❌",
+        description: "Something went wrong. Please try again.",
+      });
+    }
+  } catch {
+    toast({
+      title: "Error ❌",
+      description: "Network error. Please try again.",
+    });
+  }
+};
 
   const KaggleIcon = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
