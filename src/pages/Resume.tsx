@@ -11,10 +11,12 @@ const Resume = () => {
         <FadeIn>
           <div className="flex items-center justify-between mb-12">
             <h1 className="text-3xl md:text-4xl font-bold">Resume</h1>
-            <Button variant="outline" size="sm">
-              <Download size={16} className="mr-2" />
-              Download PDF
-            </Button>
+            <a href="/resume.pdf" download="Aman_Parganiha_Resume.pdf">
+  <Button variant="outline" size="sm">
+    <Download size={16} className="mr-2" />
+    Download PDF
+  </Button>
+</a>
           </div>
         </FadeIn>
 
