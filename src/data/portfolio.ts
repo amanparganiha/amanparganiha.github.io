@@ -3,7 +3,7 @@ export const personalInfo = {
   title: "AI & Software Engineer",
   tagline: "Building AI systems and scalable software that solve real-world problems.",
   photo: "/profile.jpg",
-  email: "aman25300@iiitnr.edu.in",
+  email: "aman.parganiha.16@gmail.com",
   location: "India",
   about:
     "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur with strong foundations in Data Structures, Algorithms, and Software Systems. I build scalable AI applications including Retrieval-Augmented Generation (RAG) pipelines and multimodal machine learning systems. My focus is on clean software architecture and production-ready AI solutions.",
