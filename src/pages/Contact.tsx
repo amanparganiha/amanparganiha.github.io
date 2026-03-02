@@ -27,10 +27,11 @@ const Contact = () => {
   if (!validate()) return;
 
   try {
-    const response = await fetch("https://formspree.io/f/xnjbknpg", {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        access_key: "d66016d8-f59d-4799-913d-1433391f42e5", 
         name: form.name,
         email: form.email,
         message: form.message,
