@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Brain, Database, Code, BarChart3 } from "lucide-react";
+import { ArrowRight, Brain, Database, Code, BarChart3, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import FadeIn from "@/components/FadeIn";
+import Seo from "@/components/Seo";
+import GithubActivity from "@/components/GithubActivity";
 import { personalInfo } from "@/data/portfolio";
+import { getAllPosts, formatDate } from "@/lib/posts";
 
 const Index = () => {
+  const latestPosts = getAllPosts().slice(0, 3);
+
   return (
     <div>
+      <Seo
+        title="AI & Software Engineer"
+        description={personalInfo.tagline}
+        path="/"
+      />
       {/* Hero */}
 <section className="relative overflow-hidden py-24 md:py-32">
   <div className="absolute inset-0 -z-10">
@@ -121,6 +132,51 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Live GitHub activity */}
+      <GithubActivity />
+
+      {/* Latest writing */}
+      {latestPosts.length > 0 && (
+        <section className="py-20 border-t border-border/50">
+          <div className="mx-auto max-w-6xl px-6">
+            <FadeIn>
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold">Latest writing</h2>
+                <Button asChild variant="ghost" size="sm">
+                  <Link to="/blogs">
+                    All posts <ArrowRight size={14} className="ml-1" />
+                  </Link>
+                </Button>
+              </div>
+            </FadeIn>
+            <div className="grid md:grid-cols-3 gap-6">
+              {latestPosts.map((post, i) => (
+                <FadeIn key={post.slug} delay={i * 0.08}>
+                  <Link
+                    to={`/blogs/${post.slug}`}
+                    className="block h-full p-6 rounded-lg border border-border/50 bg-card hover:border-primary/30 transition-colors"
+                  >
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <Clock size={12} /> {post.readTime}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold mb-2">{post.title}</h3>
+                    <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
+                    <p className="text-xs text-muted-foreground mt-4">{formatDate(post.date)}</p>
+                  </Link>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

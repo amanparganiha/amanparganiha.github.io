@@ -136,7 +136,13 @@ export interface Project {
   title: string;
   description: string;
   longDescription: string;
-  category: "NLP" | "Computer Vision" | "Data Analysis" | "MLOps" | "Generative AI";
+  category:
+    | "NLP"
+    | "Computer Vision"
+    | "Data Analysis"
+    | "MLOps"
+    | "Generative AI"
+    | "Reinforcement Learning";
   techStack: string[];
   results: string;
   image?: string;
@@ -184,58 +190,96 @@ export const projects = [
       "Built scalable multimodal dataset and evaluated multiple ML models.",
     github: "https://github.com/amanparganiha/FDA-10-Multimodal-Credit-Risk-Analysis",
   },
-];
-
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  readTime: string;
-  category: string;
-}
-
-export const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "Fine-Tuning LLMs: A Practical Guide",
-    excerpt:
-      "A hands-on walkthrough of fine-tuning large language models for domain-specific tasks, including LoRA, QLoRA, and full fine-tuning approaches.",
-    content: `Fine-tuning large language models has become one of the most impactful techniques in modern NLP. In this post, I'll walk through the practical steps of adapting a pre-trained LLM to your specific domain.\n\n## Why Fine-Tune?\n\nWhile pre-trained models like GPT-4 and Llama are incredibly capable, they often lack domain-specific knowledge. Fine-tuning bridges this gap efficiently.\n\n## Approaches\n\n### LoRA (Low-Rank Adaptation)\nLoRA freezes the pre-trained weights and injects trainable rank decomposition matrices. This dramatically reduces the number of trainable parameters.\n\n### QLoRA\nCombines quantization with LoRA for even more memory-efficient training. You can fine-tune a 65B parameter model on a single GPU.\n\n## Best Practices\n1. Start with a high-quality, curated dataset\n2. Use appropriate learning rates (1e-4 to 5e-5)\n3. Monitor for overfitting with validation metrics\n4. Evaluate on held-out test sets with domain-specific metrics`,
-    date: "2024-12-15",
-    readTime: "8 min",
-    category: "NLP",
-  },
-  {
-    id: "2",
-    title: "Building Robust ML Pipelines with MLflow",
-    excerpt:
-      "How to structure your ML experiments for reproducibility, from data versioning to model deployment with MLflow.",
-    content: `Reproducibility is one of the biggest challenges in machine learning. In this post, I share my approach to building robust ML pipelines using MLflow.\n\n## The Problem\n\nMost ML projects start as Jupyter notebooks that quickly become unmaintainable. Without proper tracking, it's impossible to reproduce results.\n\n## MLflow Components\n\n### Tracking\nLog parameters, metrics, and artifacts for every experiment run.\n\n### Projects\nPackage your code in a reproducible format with conda environments.\n\n### Model Registry\nVersion and stage your models (Staging → Production) with approval workflows.\n\n## Key Takeaways\n- Track everything from day one\n- Use consistent naming conventions\n- Automate your pipeline with CI/CD`,
-    date: "2024-11-02",
-    readTime: "6 min",
-    category: "MLOps",
-  },
   {
     id: "3",
-    title: "The State of Computer Vision in 2024",
-    excerpt:
-      "An overview of the latest breakthroughs in computer vision, from foundation models to real-time edge deployment.",
-    content: `Computer vision has seen remarkable progress in 2024. Let's explore the key trends shaping the field.\n\n## Foundation Models\n\nModels like SAM (Segment Anything) and DINOv2 have changed how we approach CV tasks. Instead of training from scratch, we can now leverage these foundation models.\n\n## Edge Deployment\n\nWith optimized architectures like EfficientNet and MobileNet, deploying CV models on edge devices is more practical than ever.\n\n## Multimodal Learning\n\nThe convergence of vision and language (CLIP, GPT-4V) is opening new possibilities for understanding visual content.\n\n## What's Next?\n- Video understanding at scale\n- 3D scene reconstruction\n- Embodied AI and robotics`,
-    date: "2024-09-20",
-    readTime: "5 min",
-    category: "Computer Vision",
+    title: "GreenCloudRL — Energy-Efficient Cloud Scheduling",
+    description:
+      "Research framework combining hierarchical RL, meta-learning, and SHAP explainability for adaptive, energy-efficient cloud scheduling.",
+    longDescription:
+      "A novel research framework that combines Hierarchical Reinforcement Learning (A2C + PPO), Meta-Learning (Reptile), and SHAP explainability to produce adaptive, interpretable, and energy-efficient cloud scheduling policies. Trained and evaluated on real Google and Alibaba cluster traces.",
+    category: "Reinforcement Learning",
+    techStack: [
+      "Python",
+      "Reinforcement Learning",
+      "PPO",
+      "A2C",
+      "Meta-Learning",
+      "SHAP",
+    ],
+    results:
+      "Trained on real Google and Alibaba cluster traces to deliver interpretable, energy-aware scheduling decisions.",
+    github: "https://github.com/amanparganiha/GreenCloudRL",
   },
   {
     id: "4",
-    title: "Data Quality > Model Complexity",
-    excerpt:
-      "Why investing in data quality consistently outperforms chasing the latest model architectures.",
-    content: `After years of building ML systems, I've learned one lesson that stands above all others: data quality matters more than model complexity.\n\n## The 80/20 Rule of ML\n\n80% of your model's performance comes from your data. The remaining 20% comes from architecture and hyperparameter choices.\n\n## Practical Steps\n\n### 1. Data Profiling\nUnderstand your data distributions, missing values, and outliers before training.\n\n### 2. Labeling Quality\nInvest in clear labeling guidelines and inter-annotator agreement metrics.\n\n### 3. Data Augmentation\nUse smart augmentation strategies that reflect real-world variation.\n\n## Conclusion\nBefore reaching for the latest transformer architecture, invest in understanding and cleaning your data. The ROI is almost always higher.`,
-    date: "2024-08-05",
-    readTime: "4 min",
-    category: "Best Practices",
+    title: "PDF RAG Agent with GPT-4o",
+    description:
+      "Conversational agent that reads your PDFs and answers questions using RAG, with web search and persistent memory.",
+    longDescription:
+      "A conversational AI agent powered by OpenAI's GPT-4o that reads PDF documents and answers questions about them using Retrieval-Augmented Generation. Supports web search and persistent memory across sessions.",
+    category: "Generative AI",
+    techStack: [
+      "Python",
+      "OpenAI API",
+      "GPT-4o",
+      "RAG",
+      "Vector Search",
+    ],
+    results:
+      "Enables grounded question-answering over personal documents with cross-session memory.",
+    github: "https://github.com/amanparganiha/PdfRagAgent",
+  },
+  {
+    id: "5",
+    title: "Notify — AI Internship Automation Agent",
+    description:
+      "Multi-agent pipeline that discovers, ranks, and drafts emails for internships. Built for the Google AI Agents Intensive.",
+    longDescription:
+      "Notify is an AI-powered internship automation agent built for the Google AI Agents Intensive. It streamlines internship discovery, ranking, and personalized email drafting through a coordinated multi-agent pipeline.",
+    category: "Generative AI",
+    techStack: [
+      "Python",
+      "LLM Agents",
+      "Multi-Agent Systems",
+      "Prompt Engineering",
+    ],
+    results:
+      "Automates the end-to-end internship outreach workflow with a multi-agent system.",
+    github: "https://github.com/amanparganiha/notify-capstone",
+  },
+  {
+    id: "6",
+    title: "COSMOS: AI-Pompeii — Heritage Preservation",
+    description:
+      "AI-driven heritage preservation and disaster-response system, built for the Google Gemini Vibe Coding Hackathon.",
+    longDescription:
+      "COSMOS: AI-POMPEII is an AI-driven heritage preservation and disaster-response system built for the Google Gemini Vibe Coding Hackathon, applying generative AI to support cultural-heritage monitoring and response.",
+    category: "Generative AI",
+    techStack: [
+      "TypeScript",
+      "Google Gemini",
+      "React",
+    ],
+    results:
+      "Hackathon project applying Gemini to cultural-heritage preservation and disaster response.",
+    github: "https://github.com/amanparganiha/cosmos-ai-pompeii",
   },
 ];
+
+
+// GitHub username — used for live activity (recent repos, contribution graph, PR feed).
+export const githubUsername = "amanparganiha";
+
+export interface Contribution {
+  repo: string; // "owner/repo"
+  url: string; // link to the merged PR (or the repo)
+  title: string; // what the contribution was
+  description: string; // a short note on what you did / why it mattered
+  status: "merged" | "open" | "closed";
+}
+
+// Curated open-source highlights. The Open Source page also shows a live feed of
+// all your pull requests pulled from the GitHub API, so this is just for the
+// contributions you most want to feature.
+// TODO: replace with your real contributions, or leave empty to show only the live feed.
+export const contributions: Contribution[] = [];
