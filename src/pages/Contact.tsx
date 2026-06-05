@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import FadeIn from "@/components/FadeIn";
+import Seo from "@/components/Seo";
 import { personalInfo } from "@/data/portfolio";
 
 const Contact = () => {
@@ -79,6 +80,11 @@ const socials = [
 
   return (
     <div className="py-16 md:py-24">
+      <Seo
+        title="Contact"
+        description="Get in touch with Aman Parganiha for AI/ML collaboration, freelance, or full-time roles."
+        path="/contact"
+      />
       <div className="mx-auto max-w-4xl px-6">
         <FadeIn>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h1>

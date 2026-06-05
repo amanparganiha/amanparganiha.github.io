@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import FadeIn from "@/components/FadeIn";
+import Seo from "@/components/Seo";
 import { projects, type Project } from "@/data/portfolio";
 
-const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI"] as const;
+const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI", "Reinforcement Learning"] as const;
 
 const Projects = () => {
   const [filter, setFilter] = useState<string>("All");
@@ -17,6 +18,11 @@ const Projects = () => {
 
   return (
     <div className="py-16 md:py-24">
+      <Seo
+        title="Projects"
+        description="ML/AI projects by Aman Parganiha — from research prototypes to production systems."
+        path="/projects"
+      />
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Projects</h1>

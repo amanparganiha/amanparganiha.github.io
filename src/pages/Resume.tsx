@@ -2,11 +2,17 @@ import { Download, Briefcase, GraduationCap, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import FadeIn from "@/components/FadeIn";
+import Seo from "@/components/Seo";
 import { experiences, education, skillCategories, certifications } from "@/data/portfolio";
 
 const Resume = () => {
   return (
     <div className="py-16 md:py-24">
+      <Seo
+        title="Resume"
+        description="Experience, education, skills, and certifications of Aman Parganiha, AI & Software Engineer."
+        path="/resume"
+      />
       <div className="mx-auto max-w-4xl px-6">
         <FadeIn>
           <div className="flex items-center justify-between mb-12">
