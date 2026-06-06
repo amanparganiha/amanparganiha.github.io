@@ -1,4 +1,4 @@
-import { Download, Briefcase, GraduationCap, Award } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Award, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import FadeIn from "@/components/FadeIn";
@@ -115,9 +115,25 @@ const Resume = () => {
           <ul className="space-y-2">
             {certifications.map((cert, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  {cert}
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <span className="font-medium text-foreground">{cert.name}</span>
+                    <span className="text-muted-foreground">
+                      — {cert.issuer}
+                      {cert.date ? ` · ${cert.date}` : ""}
+                    </span>
+                    {cert.url && (
+                      <a
+                        href={cert.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                      >
+                        Verify <ExternalLink size={12} />
+                      </a>
+                    )}
+                  </span>
                 </li>
               </FadeIn>
             ))}

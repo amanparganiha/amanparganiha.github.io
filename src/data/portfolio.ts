@@ -9,9 +9,9 @@ export const personalInfo = {
     "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur with strong foundations in Data Structures, Algorithms, and Software Systems. I build scalable AI applications including Retrieval-Augmented Generation (RAG) pipelines and multimodal machine learning systems. My focus is on clean software architecture and production-ready AI solutions.",
 
 stats: [
-    { label: "Projects Built", value: "10+" },
+    { label: "Projects Built", value: "9" },
     { label: "LeetCode Problems", value: "200+" },
-    { label: "Current CGPA", value: "8.09/10" },
+    { label: "Current CGPA", value: "8.0/10" },
     { label: "Specialization", value: "AI/ML" },
   ],
   social: {
@@ -43,6 +43,9 @@ export const experiences = [
       "Applied clean architecture and modular design principles",
     ],
   },
+  // TODO(aman): add real internships/roles here. (Note: the ims-zeotap repo is labeled a
+  // "Zeotap SRE Intern Assignment" — if that was an actual internship/role, add it; if it
+  // was only an application/take-home assignment, do NOT list it as employment.)
 ];
 
 
@@ -59,7 +62,7 @@ export const education = [
     degree: "Master of Technology in Computer Science & Engineering (AI/ML)",
     school: "IIIT Naya Raipur",
     period: "Aug 2025 — Aug 2027",
-    details: "CGPA: 8.09/10.0",
+    details: "CGPA: 8.0/10.0",
   },
   {
     degree: "Bachelor of Technology in Computer Science & Engineering",
@@ -125,9 +128,39 @@ export const skillCategories = [
 ];
 
 
-export const certifications = [
-  "Google × Kaggle — 5-Day AI Agents Intensive Course",
-  "Walmart USA — Advanced Software Engineering Job Simulation",
+export interface Certification {
+  name: string;
+  issuer: string;
+  date?: string;
+  url?: string; // public verification / certificate link
+}
+
+export const certifications: Certification[] = [
+  {
+    name: "Claude Code 101",
+    issuer: "Anthropic Education",
+    date: "Jun 2026",
+    url: "https://verify.skilljar.com/c/omr6mvgupm5s",
+  },
+  {
+    name: "Claude 101",
+    issuer: "Anthropic Education",
+    date: "Jun 2026",
+    url: "https://verify.skilljar.com/c/dofysvriaxdb",
+  },
+  {
+    name: "Dynamic Programming Camp",
+    issuer: "AlgoUniversity",
+    url: "https://d3uam8jk4sa4y4.cloudfront.net/static/certificates/Dynamic_Programming_camp/aman-parganiha.png",
+  },
+  {
+    name: "5-Day AI Agents Intensive Course",
+    issuer: "Google × Kaggle",
+  },
+  {
+    name: "Advanced Software Engineering Job Simulation",
+    issuer: "Walmart USA",
+  },
 ];
 
 
@@ -264,6 +297,63 @@ export const projects = [
       "Hackathon project applying Gemini to cultural-heritage preservation and disaster response.",
     github: "https://github.com/amanparganiha/cosmos-ai-pompeii",
   },
+  {
+    id: "7",
+    title: "SHL Conversational Assessment Recommender",
+    description:
+      "Stateless FastAPI service that helps recruiters find the right SHL assessments through a multi-turn conversation.",
+    longDescription:
+      "A conversational recommender that clarifies vague requests, recommends assessments from a scraped SHL catalog, and supports refinement and comparison. Uses a single LLM call per turn (Groq) with full conversation history plus TF-IDF–retrieved candidates to classify intent as CLARIFY, RECOMMEND, COMPARE, or REFUSE. Hallucinations are defended in three layers — prompt constraints, JSON-mode enforcement, and server-side schema sanitization — so recommendations only ever reference real catalog items.",
+    category: "NLP",
+    techStack: [
+      "Python",
+      "FastAPI",
+      "Groq LLM",
+      "TF-IDF",
+      "RAG",
+    ],
+    results:
+      "Stays within a 30s latency budget per turn and is evaluated with trace-based Recall@10 retrieval metrics.",
+    github: "https://github.com/amanparganiha/shl-agent",
+  },
+  {
+    id: "8",
+    title: "AI Resume Screening System",
+    description:
+      "AI-powered tool that ranks resumes against a job description with match scores, strengths, gaps, and recommendations.",
+    longDescription:
+      "A Streamlit application that evaluates multiple candidate resumes against a job description, ranking them by compatibility. Powered by OpenAI GPT-4o-mini, it produces structured output — a 0–100 match score, identified strengths and skill gaps, and actionable recommendations — for each candidate. Accepts TXT or PDF resumes, ships with a seven-resume demo dataset for instant testing, and exports ranked results to CSV.",
+    category: "NLP",
+    techStack: [
+      "Python",
+      "Streamlit",
+      "OpenAI GPT-4o-mini",
+      "Pandas",
+    ],
+    results:
+      "Produces structured, ranked candidate evaluations with 0–100 match scores exportable as CSV.",
+    github: "https://github.com/amanparganiha/ai-resume-screener",
+  },
+  {
+    id: "9",
+    title: "Incident Management System (IMS)",
+    description:
+      "High-throughput infrastructure monitoring and incident-response pipeline that groups failure signals into actionable incidents.",
+    longDescription:
+      "Built as a Zeotap SRE assignment, IMS ingests high-volume failure signals from distributed infrastructure and automatically consolidates related ones into single incidents. A rate-limited FastAPI endpoint returns 202 Accepted and pushes signals to Redis Streams for backpressure handling; an async consumer applies debounce logic (10s window) before persisting to PostgreSQL + TimescaleDB, with MongoDB for audit logs. Uses the Strategy pattern for alert evaluation and the State pattern for incident lifecycle, with a React 18 + Vite + Tailwind dashboard.",
+    category: "MLOps",
+    techStack: [
+      "Python",
+      "FastAPI",
+      "Redis Streams",
+      "PostgreSQL",
+      "TimescaleDB",
+      "Docker",
+    ],
+    results:
+      "Redis Streams buffer handles 10,000+ signals/sec with a 6,000 req/min ingestion endpoint and decoupled async processing.",
+    github: "https://github.com/amanparganiha/ims-zeotap",
+  },
 ];
 
 
@@ -282,4 +372,29 @@ export interface Contribution {
 // all your pull requests pulled from the GitHub API, so this is just for the
 // contributions you most want to feature.
 // TODO: replace with your real contributions, or leave empty to show only the live feed.
-export const contributions: Contribution[] = [];
+export const contributions: Contribution[] = [
+  {
+    repo: "matplotlib/matplotlib",
+    url: "https://github.com/matplotlib/matplotlib/pull/31422",
+    title: "Improve legend loc and bbox_to_anchor documentation (#26620)",
+    description:
+      "Clarified the legend positioning docs for `loc` and `bbox_to_anchor`. Merged into matplotlib and shipped in the v3.11.0 milestone.",
+    status: "merged",
+  },
+  {
+    repo: "jupyterlab/jupyterlab",
+    url: "https://github.com/jupyterlab/jupyterlab/pull/18668",
+    title: "Add documentation about the Metadata Editor — Advanced Tools interface",
+    description:
+      "Authored new documentation explaining the Metadata Editor in JupyterLab's Advanced Tools panel.",
+    status: "open",
+  },
+  {
+    repo: "jupyterlab/jupyterlab",
+    url: "https://github.com/jupyterlab/jupyterlab/pull/18684",
+    title: "Fix stdin input styling to match JupyterLab theme (#14458)",
+    description:
+      "Proposed a fix so terminal-style stdin input matches the active JupyterLab theme.",
+    status: "closed",
+  },
+];

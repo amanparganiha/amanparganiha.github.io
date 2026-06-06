@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const navItems = [
+type NavItem = { label: string; path: string; icon?: LucideIcon };
+
+const navItems: NavItem[] = [
   { label: "Home", path: "/" },
   { label: "Resume", path: "/resume" },
   { label: "Projects", path: "/projects" },
@@ -37,12 +39,15 @@ const Navbar = () => {
                 <Link
                   to={item.path}
                   className={cn(
-                    "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                    "flex items-center gap-1.5 px-4 py-2 rounded-md text-sm font-medium transition-colors",
                     isActive(item.path)
                       ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      : item.icon
+                        ? "text-primary/80 hover:text-primary hover:bg-accent/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   )}
                 >
+                  {item.icon && <item.icon size={15} strokeWidth={1.75} />}
                   {item.label}
                 </Link>
               </li>
@@ -74,12 +79,15 @@ const Navbar = () => {
                   to={item.path}
                   onClick={() => setMobileOpen(false)}
                   className={cn(
-                    "block px-4 py-2.5 rounded-md text-sm font-medium transition-colors",
+                    "flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-colors",
                     isActive(item.path)
                       ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      : item.icon
+                        ? "text-primary/80 hover:text-primary hover:bg-accent/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                   )}
                 >
+                  {item.icon && <item.icon size={16} strokeWidth={1.75} />}
                   {item.label}
                 </Link>
               </li>
