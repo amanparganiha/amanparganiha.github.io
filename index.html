@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+
+    <!-- Theme: dark by default; a saved manual choice (next-themes "theme" key)
+         always wins. Runs before paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var theme = saved === "light" || saved === "dark" ? saved : "dark";
+          var el = document.documentElement;
+          el.classList.toggle("dark", theme === "dark");
+          el.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+
     <title>Aman Parganiha | AI & Software Engineer</title>
     <meta name="description" content="Portfolio of Aman Parganiha - AI & Software Engineer building AI systems and scalable software." />
     <meta name="author" content="Aman Parganiha" />

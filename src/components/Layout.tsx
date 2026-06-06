@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
+import NebulaBackground from "./NebulaBackground";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useLocation();
@@ -11,6 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <NebulaBackground />
       <Navbar />
       <main className="flex-1">{children}</main>
       <footer className="border-t border-border/50 py-8">
