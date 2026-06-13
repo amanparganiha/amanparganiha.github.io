@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +15,10 @@ import BlogPost from "./pages/BlogPost";
 import OpenSource from "./pages/OpenSource";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+
+// Webcam + MediaPipe demo. Split into its own chunk so it (and the ~10 MB model)
+// never loads until someone actually opens the route.
+const VisionLab = lazy(() => import("./pages/VisionLab"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +43,14 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/resume" element={<Resume />} />
                 <Route path="/projects" element={<Projects />} />
+                <Route
+                  path="/projects/air-canvas"
+                  element={
+                    <Suspense fallback={<div className="py-24 text-center text-muted-foreground">Loading demo…</div>}>
+                      <VisionLab />
+                    </Suspense>
+                  }
+                />
                 <Route path="/blogs" element={<Blogs />} />
                 <Route path="/blogs/:slug" element={<BlogPost />} />
                 <Route path="/open-source" element={<OpenSource />} />

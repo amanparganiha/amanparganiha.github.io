@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ExternalLink, Github, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -13,6 +14,11 @@ const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "
 const Projects = () => {
   const [filter, setFilter] = useState<string>("All");
   const [selected, setSelected] = useState<Project | null>(null);
+  const navigate = useNavigate();
+
+  // A demo that points at an in-app route (starts with "/") is a live demo on
+  // this site, so we navigate internally instead of opening a new tab.
+  const isInternal = (url?: string) => !!url && url.startsWith("/");
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -59,9 +65,16 @@ const Projects = () => {
                 onClick={() => setSelected(project)}
               >
                 <CardHeader className="pb-3">
-                  <Badge variant="secondary" className="w-fit text-xs mb-2">
-                    {project.category}
-                  </Badge>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary" className="w-fit text-xs">
+                      {project.category}
+                    </Badge>
+                    {isInternal(project.demo) && (
+                      <Badge className="w-fit text-xs gap-1">
+                        <Sparkles size={11} /> Live
+                      </Badge>
+                    )}
+                  </div>
                   <CardTitle className="text-lg">{project.title}</CardTitle>
                   <CardDescription className="text-sm">{project.description}</CardDescription>
                 </CardHeader>
@@ -124,13 +137,25 @@ const Projects = () => {
                         </a>
                       </Button>
                     )}
-                    {selected.demo && (
-                      <Button size="sm" asChild>
-                        <a href={selected.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink size={14} className="mr-1" /> Live Demo
-                        </a>
-                      </Button>
-                    )}
+                    {selected.demo &&
+                      (isInternal(selected.demo) ? (
+                        <Button
+                          size="sm"
+                          onClick={() => {
+                            const to = selected.demo!;
+                            setSelected(null);
+                            navigate(to);
+                          }}
+                        >
+                          <Sparkles size={14} className="mr-1" /> Try Live Demo
+                        </Button>
+                      ) : (
+                        <Button size="sm" asChild>
+                          <a href={selected.demo} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink size={14} className="mr-1" /> Live Demo
+                          </a>
+                        </Button>
+                      ))}
                   </div>
                 </div>
               </>
