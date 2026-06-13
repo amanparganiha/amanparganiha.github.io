@@ -9,7 +9,7 @@ export const personalInfo = {
     "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur with strong foundations in Data Structures, Algorithms, and Software Systems. I build scalable AI applications including Retrieval-Augmented Generation (RAG) pipelines and multimodal machine learning systems. My focus is on clean software architecture and production-ready AI solutions.",
 
 stats: [
-    { label: "Projects Built", value: "9" },
+    { label: "Projects Built", value: "10" },
     { label: "LeetCode Problems", value: "200+" },
     { label: "Current CGPA", value: "8.0/10" },
     { label: "Specialization", value: "AI/ML" },
@@ -183,7 +183,7 @@ export interface Project {
   demo?: string;
 }
 
-export const projects = [
+export const projects: Project[] = [
   {
     id: "1",
     title: "Event-Driven Retrieval-Augmented Generation Agent",
@@ -353,6 +353,19 @@ export const projects = [
     results:
       "Redis Streams buffer handles 10,000+ signals/sec with a 6,000 req/min ingestion endpoint and decoupled async processing.",
     github: "https://github.com/amanparganiha/ims-zeotap",
+  },
+  {
+    id: "10",
+    title: "Air Canvas — Real-Time Hand-Tracking Drawing",
+    description:
+      "Draw in the air with your finger — real-time hand tracking that runs entirely in the browser, no backend.",
+    longDescription:
+      "A live, fully client-side computer-vision demo. A MediaPipe hand-landmark model streams 21 keypoints per frame from the webcam; on top of it I built the finger-state detection, a gesture classifier (point to draw, two fingers to move, dwell on a palette band to switch color), a One-Euro filter that smooths fingertip jitter into clean strokes, and a DPR-aware multi-canvas pipeline (mirrored video + persistent paint layer + per-frame skeleton overlay) with eraser, undo, and PNG export. Runs at interactive frame rates via the WebGL delegate and ships as a lazy-loaded route so it never affects the rest of the site.",
+    category: "Computer Vision",
+    techStack: ["TypeScript", "React", "MediaPipe", "WebGL", "Canvas API", "Computer Vision"],
+    results:
+      "Runs in real time entirely in-browser with no server — try it live, no install required.",
+    demo: "/projects/air-canvas",
   },
 ];
 
