@@ -69,7 +69,7 @@ const Projects = () => {
                     <Badge variant="secondary" className="w-fit text-xs">
                       {project.category}
                     </Badge>
-                    {isInternal(project.demo) && (
+                    {project.demo && (
                       <Badge className="w-fit text-xs gap-1">
                         <Sparkles size={11} /> Live
                       </Badge>
