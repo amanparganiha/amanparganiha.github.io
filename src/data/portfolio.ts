@@ -203,6 +203,7 @@ export const projects: Project[] = [
     results:
       "Optimized chunking and embedding strategy to improve retrieval precision.",
     github: "https://github.com/amanparganiha/Event-Driven-RAG-Agent",
+    demo: "https://event-driven-rag-agent.streamlit.app/",
   },
   {
     id: "2",
@@ -222,6 +223,7 @@ export const projects: Project[] = [
     results:
       "Built scalable multimodal dataset and evaluated multiple ML models.",
     github: "https://github.com/amanparganiha/FDA-10-Multimodal-Credit-Risk-Analysis",
+    demo: "https://multimodal-credit-risk-analysis.streamlit.app/",
   },
   {
     id: "3",
@@ -261,6 +263,7 @@ export const projects: Project[] = [
     results:
       "Enables grounded question-answering over personal documents with cross-session memory.",
     github: "https://github.com/amanparganiha/PdfRagAgent",
+    demo: "https://pdfragagent.streamlit.app/",
   },
   {
     id: "5",
