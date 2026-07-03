@@ -9,7 +9,7 @@ import FadeIn from "@/components/FadeIn";
 import Seo from "@/components/Seo";
 import { projects, type Project } from "@/data/portfolio";
 
-const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI", "Reinforcement Learning"] as const;
+const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI", "Reinforcement Learning", "Tools"] as const;
 
 const Projects = () => {
   const [filter, setFilter] = useState<string>("All");
