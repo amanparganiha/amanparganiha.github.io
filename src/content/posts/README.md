@@ -23,4 +23,8 @@ Every `.md` file in this folder becomes a blog post automatically — no code ch
 3. Commit and push. Posts are sorted by `date` (newest first) and reading time is
    computed automatically from the word count.
 
-That's it — `git push` publishes the post.
+That's it — `git push` publishes the post. (Adding the file through the GitHub
+web UI works the same way.)
+
+**Shortcut:** in Claude Code, type `/blog` and paste your draft or notes —
+the skill formats the post, regenerates the sitemap/RSS, and pushes it live.
