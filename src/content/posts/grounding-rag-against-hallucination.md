@@ -5,8 +5,6 @@ tags: [RAG, LLM, Generative AI]
 excerpt: "Retrieval alone doesn't make an agent honest. Here's the three-layer defense I actually ship to keep a RAG recommender from inventing things that aren't in the catalog."
 ---
 
-<!-- TODO(aman): review/personalize this draft before it's truly "yours" -->
-
 The most common thing people get wrong about Retrieval-Augmented Generation is assuming that *retrieving* the right context is enough. It isn't. A model handed five perfectly relevant chunks will still, every so often, confidently cite a sixth thing that doesn't exist. When I built a conversational assessment recommender that pulls from a fixed catalog, "it mostly works" was not good enough — a recommendation that points at a product we don't offer is worse than no answer at all.
 
 So I stopped treating hallucination as a prompt-tuning problem and started treating it as a systems problem. What I ended up with is a three-layer defense, and each layer catches a different failure mode.

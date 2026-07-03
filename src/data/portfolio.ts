@@ -2,17 +2,21 @@ export const personalInfo = {
   name: "Aman Parganiha",
   title: "AI & Software Engineer",
   tagline: "Building AI systems and scalable software that solve real-world problems.",
+  status: "ML Intern @ FlyRank AI",
+  heroHeadline: "I build AI systems that ship.",
+  heroSub:
+    "AI & Software Engineer — turning research-grade ML like RAG pipelines and multimodal models into production-ready software with clean, scalable architecture.",
   photo: "/profile-480.webp",
   email: "aman.parganiha.16@gmail.com",
   location: "India",
   about:
     "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur with strong foundations in Data Structures, Algorithms, and Software Systems. I build scalable AI applications including Retrieval-Augmented Generation (RAG) pipelines and multimodal machine learning systems. My focus is on clean software architecture and production-ready AI solutions.",
 
-stats: [
+  stats: [
+    { label: "GATE CSE Rank", value: "Top 7.8%" },
     { label: "Projects Built", value: "10" },
     { label: "LeetCode Problems", value: "200+" },
     { label: "Current CGPA", value: "8.0/10" },
-    { label: "Specialization", value: "AI/ML" },
   ],
   social: {
     github: "https://github.com/amanparganiha",
@@ -30,22 +34,15 @@ export interface Experience {
   highlights: string[];
 }
 
-export const experiences = [
+export const experiences: Experience[] = [
   {
-    role: "M.Tech CSE (AI/ML)",
-    company: "IIIT Naya Raipur",
-    period: "2025 — Present",
+    role: "Machine Learning Intern",
+    company: "FlyRank AI",
+    period: "Jun 2026 — Present",
     description:
-      "Focused on AI/ML systems, scalable software engineering, and advanced computer science concepts.",
-    highlights: [
-      "Built scalable RAG pipelines for document retrieval",
-      "Worked on multimodal machine learning systems",
-      "Applied clean architecture and modular design principles",
-    ],
+      "Machine learning internship at FlyRank AI (Chicago, US) — working remotely on applied ML systems.",
+    highlights: [],
   },
-  // TODO(aman): add real internships/roles here. (Note: the ims-zeotap repo is labeled a
-  // "Zeotap SRE Intern Assignment" — if that was an actual internship/role, add it; if it
-  // was only an application/take-home assignment, do NOT list it as employment.)
 ];
 
 
@@ -354,7 +351,7 @@ export const projects: Project[] = [
       "Docker",
     ],
     results:
-      "Redis Streams buffer handles 10,000+ signals/sec with a 6,000 req/min ingestion endpoint and decoupled async processing.",
+      "Designed for high-throughput ingestion: the rate-limited endpoint acknowledges immediately with 202 while Redis Streams decouple async processing.",
     github: "https://github.com/amanparganiha/ims-zeotap",
   },
   {
@@ -387,7 +384,6 @@ export interface Contribution {
 // Curated open-source highlights. The Open Source page also shows a live feed of
 // all your pull requests pulled from the GitHub API, so this is just for the
 // contributions you most want to feature.
-// TODO: replace with your real contributions, or leave empty to show only the live feed.
 export const contributions: Contribution[] = [
   {
     repo: "matplotlib/matplotlib",
@@ -399,18 +395,18 @@ export const contributions: Contribution[] = [
   },
   {
     repo: "jupyterlab/jupyterlab",
+    url: "https://github.com/jupyterlab/jupyterlab/pull/18610",
+    title: "Remove explicit timeouts in terminal Playwright tests",
+    description:
+      "Improved the reliability of JupyterLab's terminal end-to-end test suite by removing brittle explicit timeouts. Merged after multi-round maintainer review.",
+    status: "merged",
+  },
+  {
+    repo: "jupyterlab/jupyterlab",
     url: "https://github.com/jupyterlab/jupyterlab/pull/18668",
     title: "Add documentation about the Metadata Editor — Advanced Tools interface",
     description:
       "Authored new documentation explaining the Metadata Editor in JupyterLab's Advanced Tools panel.",
     status: "open",
-  },
-  {
-    repo: "jupyterlab/jupyterlab",
-    url: "https://github.com/jupyterlab/jupyterlab/pull/18684",
-    title: "Fix stdin input styling to match JupyterLab theme (#14458)",
-    description:
-      "Proposed a fix so terminal-style stdin input matches the active JupyterLab theme.",
-    status: "closed",
   },
 ];
