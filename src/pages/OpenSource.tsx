@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GitPullRequest, GitMerge, ExternalLink, Github } from "lucide-react";
+import { GitPullRequest, GitMerge, Github } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
