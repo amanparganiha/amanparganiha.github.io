@@ -14,7 +14,7 @@ export const personalInfo = {
 
   stats: [
     { label: "GATE CSE Rank", value: "Top 7.8%" },
-    { label: "Projects Built", value: "10" },
+    { label: "Projects Built", value: "11" },
     { label: "LeetCode Problems", value: "200+" },
     { label: "Current CGPA", value: "8.0/10" },
   ],
@@ -172,7 +172,8 @@ export interface Project {
     | "Data Analysis"
     | "MLOps"
     | "Generative AI"
-    | "Reinforcement Learning";
+    | "Reinforcement Learning"
+    | "Tools";
   techStack: string[];
   results: string;
   image?: string;
@@ -366,6 +367,20 @@ export const projects: Project[] = [
     results:
       "Runs in real time entirely in-browser with no server — try it live, no install required.",
     demo: "/projects/air-canvas",
+  },
+  {
+    id: "11",
+    title: "Role Prep Roadmaps — Learning Tracker",
+    description:
+      "Zero-dependency web app for tracking structured learning roadmaps, with curated AI/ML career tracks and interview resources.",
+    longDescription:
+      "A self-contained roadmap tracker that ships as a single HTML file — no framework, no build step, no backend. It organizes five curated tracks (AI/ML Engineer, Computer Vision Engineer, Forward Deployed Engineer, Remote AI Career, and my VL-JEPA thesis) into roadmaps, interview prep, Q&A banks, and resource lists. Progress is checked off per item and persisted in localStorage, with a live completion bar, light/dark themes, and adjustable text size.",
+    category: "Tools",
+    techStack: ["HTML", "CSS", "JavaScript", "localStorage", "GitHub Pages"],
+    results:
+      "Single-file app with zero dependencies — per-track progress persists locally across sessions.",
+    github: "https://github.com/amanparganiha/Roadmaps",
+    demo: "https://amanparganiha.github.io/Roadmaps/roadmaps/index.html",
   },
 ];
 
