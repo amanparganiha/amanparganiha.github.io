@@ -35,6 +35,17 @@ const Index = () => {
         title="AI & Software Engineer"
         description={personalInfo.tagline}
         path="/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: personalInfo.name,
+          jobTitle: personalInfo.title,
+          url: "https://amanparganiha.github.io/",
+          image: `https://amanparganiha.github.io${personalInfo.photo}`,
+          email: `mailto:${personalInfo.email}`,
+          alumniOf: "IIIT Naya Raipur",
+          sameAs: Object.values(personalInfo.social),
+        }}
       />
 
       {/* Hero */}

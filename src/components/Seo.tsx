@@ -10,9 +10,11 @@ interface SeoProps {
   path?: string;
   image?: string;
   type?: "website" | "article";
+  /** schema.org structured data, rendered as application/ld+json. */
+  jsonLd?: Record<string, unknown>;
 }
 
-const Seo = ({ title, description, path, image, type = "website" }: SeoProps) => {
+const Seo = ({ title, description, path, image, type = "website", jsonLd }: SeoProps) => {
   const fullTitle = `${title} | Aman Parganiha`;
   const url = path ? `${SITE_URL}${path}` : SITE_URL;
   const img = image ?? DEFAULT_IMAGE;
@@ -35,6 +37,10 @@ const Seo = ({ title, description, path, image, type = "website" }: SeoProps) =>
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={img} />
+
+      {jsonLd && (
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      )}
     </Helmet>
   );
 };

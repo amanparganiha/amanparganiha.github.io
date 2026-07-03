@@ -5,7 +5,7 @@ Every `.md` file in this folder becomes a blog post automatically — no code ch
 ## Add a new post
 
 1. Create a new file here, e.g. `my-new-post.md`. The file name becomes the URL slug
-   (`my-new-post` → `/#/blogs/my-new-post`).
+   (`my-new-post` → `/blogs/my-new-post`).
 2. Add frontmatter at the top, then write the body in normal Markdown:
 
    ```md

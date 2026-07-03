@@ -38,6 +38,19 @@ const BlogPost = () => {
         description={post.excerpt}
         path={`/blogs/${post.slug}`}
         type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          url: `https://amanparganiha.github.io/blogs/${post.slug}`,
+          author: {
+            "@type": "Person",
+            name: "Aman Parganiha",
+            url: "https://amanparganiha.github.io/",
+          },
+        }}
       />
       <div className="mx-auto max-w-3xl px-6">
         <Button asChild variant="ghost" size="sm" className="mb-8">
