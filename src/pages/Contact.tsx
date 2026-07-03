@@ -12,6 +12,8 @@ const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  // Honeypot: hidden from humans, bots auto-tick it and the submit is dropped.
+  const [botcheck, setBotcheck] = useState(false);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -25,6 +27,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+  if (botcheck) return;
   if (!validate()) return;
 
   try {
@@ -32,7 +35,8 @@ const Contact = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        access_key: "d66016d8-f59d-4799-913d-1433391f42e5", 
+        access_key: "d66016d8-f59d-4799-913d-1433391f42e5",
+        botcheck,
         name: form.name,
         email: form.email,
         message: form.message,
@@ -97,6 +101,16 @@ const socials = [
           {/* Form */}
           <FadeIn delay={0.1}>
             <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                type="checkbox"
+                name="botcheck"
+                checked={botcheck}
+                onChange={(e) => setBotcheck(e.target.checked)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
               <div>
                 <Input
                   placeholder="Your Name"

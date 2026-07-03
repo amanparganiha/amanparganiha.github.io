@@ -6,6 +6,13 @@
 @tailwind utilities;
 
 @layer base {
+  /* Visible keyboard-focus ring for every interactive element, including the
+     raw <button>/<a> elements that don't use shadcn's focus classes. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
   :root {
     --background: 240 24% 98%;
     --foreground: 245 40% 12%;
