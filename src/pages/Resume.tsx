@@ -18,15 +18,16 @@ const Resume = () => {
           <div className="flex items-center justify-between mb-12">
             <h1 className="text-3xl md:text-4xl font-bold">Resume</h1>
             <a href="/resume.pdf" download="Aman_Parganiha_Resume.pdf">
-  <Button variant="outline" size="sm">
-    <Download size={16} className="mr-2" />
-    Download PDF
-  </Button>
-</a>
+              <Button variant="outline" size="sm">
+                <Download size={16} className="mr-2" />
+                Download PDF
+              </Button>
+            </a>
           </div>
         </FadeIn>
 
-        {/* Experience */}
+        {/* Experience — hidden entirely when there are no entries */}
+        {experiences.length > 0 && (
         <section className="mb-16">
           <FadeIn>
             <div className="flex items-center gap-2 mb-8">
@@ -43,19 +44,22 @@ const Resume = () => {
                   <h3 className="font-semibold">{exp.role}</h3>
                   <p className="text-sm text-primary mb-2">{exp.company}</p>
                   <p className="text-sm text-muted-foreground mb-2">{exp.description}</p>
-                  <ul className="space-y-1">
-                    {exp.highlights.map((h, j) => (
-                      <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-muted-foreground shrink-0" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
+                  {exp.highlights.length > 0 && (
+                    <ul className="space-y-1">
+                      {exp.highlights.map((h, j) => (
+                        <li key={j} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="mt-1.5 w-1 h-1 rounded-full bg-muted-foreground shrink-0" />
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </FadeIn>
             ))}
           </div>
         </section>
+        )}
 
         {/* Education */}
         <section className="mb-16">

@@ -62,7 +62,7 @@ const Index = () => {
             <div className="flex-1">
               <FadeIn>
                 <span className="inline-flex items-center gap-3 rounded-full border border-border/60 bg-card/40 px-4 py-1.5 backdrop-blur-xl">
-                  <StatusDot label="Currently building" />
+                  <StatusDot label={personalInfo.status} />
                 </span>
               </FadeIn>
 
@@ -77,16 +77,14 @@ const Index = () => {
                   I'm{" "}
                   <span className="text-primary">{personalInfo.name}</span>
                   <span className="mt-3 block text-foreground/90">
-                    I build AI systems that ship.
+                    {personalInfo.heroHeadline}
                   </span>
                 </h1>
               </FadeIn>
 
               <FadeIn delay={0.18}>
                 <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                  {personalInfo.title} — turning research-grade ML like RAG
-                  pipelines and multimodal models into production-ready software
-                  with clean, scalable architecture.
+                  {personalInfo.heroSub}
                 </p>
               </FadeIn>
 
