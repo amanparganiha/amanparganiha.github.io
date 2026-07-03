@@ -67,7 +67,7 @@ const Index = () => {
               </FadeIn>
 
               <FadeIn delay={0.05}>
-                <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.3em] text-primary/80">
+                <p className="mt-6 font-mono text-xs uppercase tracking-[0.3em] text-primary/80">
                   [ AI · ML · SYSTEMS ]
                 </p>
               </FadeIn>
@@ -120,7 +120,7 @@ const Index = () => {
                   </div>
                 </div>
                 {/* Coordinate-style caption */}
-                <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
                   {personalInfo.location} · M.Tech AI/ML
                 </p>
               </div>
@@ -144,7 +144,7 @@ const Index = () => {
                   <p className="font-mono text-3xl font-medium tracking-tight text-primary md:text-4xl">
                     {stat.value}
                   </p>
-                  <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
                     {stat.label}
                   </p>
                 </GlassCard>
@@ -178,7 +178,7 @@ const Index = () => {
                 {capabilities.map((item) => (
                   <GlassCard key={item.label} hover className="p-5">
                     <item.icon size={20} strokeWidth={1.5} className="mb-3 text-primary" />
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                    <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       {item.label}
                     </p>
                     <p className="mt-1 text-sm text-foreground/80">{item.desc}</p>
@@ -233,7 +233,7 @@ const Index = () => {
                       <p className="line-clamp-3 text-sm text-muted-foreground">
                         {post.excerpt}
                       </p>
-                      <p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                      <p className="mt-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
                         {formatDate(post.date)}
                       </p>
                     </GlassCard>

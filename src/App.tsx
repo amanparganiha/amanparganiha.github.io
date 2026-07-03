@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider } from "next-themes";
 import Layout from "@/components/Layout";
 import Index from "./pages/Index";
@@ -32,6 +33,9 @@ const queryClient = new QueryClient({
 
 const App = () => (
   <HelmetProvider>
+    {/* reducedMotion="user" makes every framer-motion animation respect the
+        OS-level prefers-reduced-motion setting. */}
+    <MotionConfig reducedMotion="user">
     <ThemeProvider attribute="class" defaultTheme="dark">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
@@ -57,6 +61,7 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
+    </MotionConfig>
   </HelmetProvider>
 );
 

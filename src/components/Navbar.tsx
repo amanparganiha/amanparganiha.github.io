@@ -63,6 +63,8 @@ const Navbar = () => {
             className="p-2 rounded-md hover:bg-accent"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -71,7 +73,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border/50 bg-background">
+        <div id="mobile-menu" className="md:hidden border-t border-border/50 bg-background">
           <ul className="flex flex-col px-6 py-4 gap-1">
             {navItems.map((item) => (
               <li key={item.path}>
