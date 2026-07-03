@@ -39,8 +39,8 @@ const posts = readdirSync(POSTS_DIR)
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
-// HashRouter URLs take the form /#/blogs/<slug>
-const blogUrl = (slug) => `${SITE_URL}/#/blogs/${slug}`;
+// BrowserRouter URLs take the form /blogs/<slug> (must match Seo.tsx canonicals)
+const blogUrl = (slug) => `${SITE_URL}/blogs/${slug}`;
 
 const rssItems = posts
   .map(
@@ -58,7 +58,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
     <title>Aman Parganiha — Blog</title>
-    <link>${SITE_URL}/#/blogs</link>
+    <link>${SITE_URL}/blogs</link>
     <description>Thoughts on machine learning, data science, and building AI systems.</description>
     <language>en-us</language>
 ${rssItems}
@@ -68,7 +68,7 @@ ${rssItems}
 
 const staticRoutes = ["/", "/resume", "/projects", "/open-source", "/blogs", "/contact"];
 const urls = [
-  ...staticRoutes.map((r) => `${SITE_URL}/#${r}`),
+  ...staticRoutes.map((r) => (r === "/" ? `${SITE_URL}/` : `${SITE_URL}${r}`)),
   ...posts.map((p) => blogUrl(p.slug)),
 ];
 

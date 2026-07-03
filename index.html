@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0f1a" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+
+    <!-- GitHub Pages SPA fallback: 404.html encodes the requested path as
+         /?/path; decode it back into a real path before React Router mounts.
+         See https://github.com/rafgraph/spa-github-pages -->
+    <script>
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
 
     <!-- Theme: dark by default; a saved manual choice (next-themes "theme" key)
          always wins. Runs before paint to avoid a flash of the wrong theme. -->
@@ -22,6 +42,8 @@
     <title>Aman Parganiha | AI & Software Engineer</title>
     <meta name="description" content="Portfolio of Aman Parganiha - AI & Software Engineer building AI systems and scalable software." />
     <meta name="author" content="Aman Parganiha" />
+    <link rel="canonical" href="https://amanparganiha.github.io/" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <meta property="og:title" content="Aman Parganiha | AI & Software Engineer" />
     <meta property="og:image" content="https://amanparganiha.github.io/profile.jpg" />

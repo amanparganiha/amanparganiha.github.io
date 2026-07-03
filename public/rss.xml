@@ -2,40 +2,40 @@
 <rss version="2.0">
   <channel>
     <title>Aman Parganiha — Blog</title>
-    <link>https://amanparganiha.github.io/#/blogs</link>
+    <link>https://amanparganiha.github.io/blogs</link>
     <description>Thoughts on machine learning, data science, and building AI systems.</description>
     <language>en-us</language>
     <item>
       <title>Three Layers That Stop a RAG Agent From Hallucinating</title>
-      <link>https://amanparganiha.github.io/#/blogs/grounding-rag-against-hallucination</link>
+      <link>https://amanparganiha.github.io/blogs/grounding-rag-against-hallucination</link>
       <guid isPermaLink="false">grounding-rag-against-hallucination</guid>
       <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
       <description>Retrieval alone doesn't make an agent honest. Here's the three-layer defense I actually ship to keep a RAG recommender from inventing things that aren't in the catalog.</description>
     </item>
     <item>
       <title>Fine-Tuning LLMs: A Practical Guide</title>
-      <link>https://amanparganiha.github.io/#/blogs/fine-tuning-llms-practical-guide</link>
+      <link>https://amanparganiha.github.io/blogs/fine-tuning-llms-practical-guide</link>
       <guid isPermaLink="false">fine-tuning-llms-practical-guide</guid>
       <pubDate>Sun, 15 Dec 2024 00:00:00 GMT</pubDate>
       <description>A hands-on walkthrough of fine-tuning large language models for domain-specific tasks, including LoRA, QLoRA, and full fine-tuning approaches.</description>
     </item>
     <item>
       <title>Building Robust ML Pipelines with MLflow</title>
-      <link>https://amanparganiha.github.io/#/blogs/robust-ml-pipelines-mlflow</link>
+      <link>https://amanparganiha.github.io/blogs/robust-ml-pipelines-mlflow</link>
       <guid isPermaLink="false">robust-ml-pipelines-mlflow</guid>
       <pubDate>Sat, 02 Nov 2024 00:00:00 GMT</pubDate>
       <description>How to structure your ML experiments for reproducibility, from data versioning to model deployment with MLflow.</description>
     </item>
     <item>
       <title>The State of Computer Vision in 2024</title>
-      <link>https://amanparganiha.github.io/#/blogs/state-of-computer-vision-2024</link>
+      <link>https://amanparganiha.github.io/blogs/state-of-computer-vision-2024</link>
       <guid isPermaLink="false">state-of-computer-vision-2024</guid>
       <pubDate>Fri, 20 Sep 2024 00:00:00 GMT</pubDate>
       <description>An overview of the latest breakthroughs in computer vision, from foundation models to real-time edge deployment.</description>
     </item>
     <item>
       <title>Data Quality &gt; Model Complexity</title>
-      <link>https://amanparganiha.github.io/#/blogs/data-quality-over-model-complexity</link>
+      <link>https://amanparganiha.github.io/blogs/data-quality-over-model-complexity</link>
       <guid isPermaLink="false">data-quality-over-model-complexity</guid>
       <pubDate>Mon, 05 Aug 2024 00:00:00 GMT</pubDate>
       <description>Why investing in data quality consistently outperforms chasing the latest model architectures.</description>
