@@ -8,16 +8,16 @@ import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "next-themes";
 import Layout from "@/components/Layout";
 import Index from "./pages/Index";
-import Resume from "./pages/Resume";
-import Projects from "./pages/Projects";
-import Blogs from "./pages/Blogs";
-import BlogPost from "./pages/BlogPost";
-import OpenSource from "./pages/OpenSource";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
 
-// Webcam + MediaPipe demo. Split into its own chunk so it (and the ~10 MB model)
-// never loads until someone actually opens the route.
+// Every route except the landing page is code-split so the first paint only
+// ships the home chunk. VisionLab additionally defers its ~10 MB MediaPipe model.
+const Resume = lazy(() => import("./pages/Resume"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Blogs = lazy(() => import("./pages/Blogs"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const OpenSource = lazy(() => import("./pages/OpenSource"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 const VisionLab = lazy(() => import("./pages/VisionLab"));
 
 const queryClient = new QueryClient({
@@ -39,24 +39,19 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Layout>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/resume" element={<Resume />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route
-                  path="/projects/air-canvas"
-                  element={
-                    <Suspense fallback={<div className="py-24 text-center text-muted-foreground">Loading demo…</div>}>
-                      <VisionLab />
-                    </Suspense>
-                  }
-                />
-                <Route path="/blogs" element={<Blogs />} />
-                <Route path="/blogs/:slug" element={<BlogPost />} />
-                <Route path="/open-source" element={<OpenSource />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Suspense fallback={<div className="py-24 text-center text-muted-foreground">Loading…</div>}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/resume" element={<Resume />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/projects/air-canvas" element={<VisionLab />} />
+                  <Route path="/blogs" element={<Blogs />} />
+                  <Route path="/blogs/:slug" element={<BlogPost />} />
+                  <Route path="/open-source" element={<OpenSource />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
             </Layout>
           </BrowserRouter>
         </TooltipProvider>

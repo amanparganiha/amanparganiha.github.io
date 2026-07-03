@@ -113,6 +113,10 @@ const Index = () => {
                     <img
                       src={personalInfo.photo}
                       alt={personalInfo.name}
+                      width={480}
+                      height={501}
+                      loading="eager"
+                      decoding="async"
                       className="h-full w-full object-cover object-top"
                     />
                   </div>

@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Aman Parganiha",
   title: "AI & Software Engineer",
   tagline: "Building AI systems and scalable software that solve real-world problems.",
-  photo: "/profile.jpg",
+  photo: "/profile-480.webp",
   email: "aman.parganiha.16@gmail.com",
   location: "India",
   about:
