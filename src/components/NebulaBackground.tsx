@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
  */
 
 const TAU = Math.PI * 2;
+const LINK_R = 120; // constellation: link stars within this radius of the cursor (px)
 
 type Star = {
   x: number; // normalized 0..1
@@ -97,6 +98,9 @@ const NebulaBackground = () => {
     let stars: Star[] = [];
     const shooting: Shooting[] = [];
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+    // Cursor in pixel coords for the constellation effect; inactive until
+    // the first pointermove so nothing draws on touch-only devices.
+    const cursor = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false };
     let nextShoot = 0;
     let raf = 0;
     let last = performance.now();
@@ -155,13 +159,20 @@ const NebulaBackground = () => {
       // Ease parallax toward the cursor target.
       mouse.x += (mouse.tx - mouse.x) * 0.04;
       mouse.y += (mouse.ty - mouse.y) * 0.04;
+      cursor.x += (cursor.tx - cursor.x) * 0.12;
+      cursor.y += (cursor.ty - cursor.y) * 0.12;
 
       // Stars.
+      const near: { x: number; y: number; d: number }[] = [];
       for (const s of stars) {
         const a = s.baseA * (0.5 + 0.5 * Math.sin(t * s.tw + s.ph)) * pal.starAlpha;
         if (a <= 0.01) continue;
         const px = s.x * w + mouse.x * s.depth * 12;
         const py = s.y * h + mouse.y * s.depth * 12;
+        if (cursor.active) {
+          const d = Math.hypot(px - cursor.x, py - cursor.y);
+          if (d < LINK_R) near.push({ x: px, y: py, d });
+        }
         if (s.r > 1.1) {
           const g = ctx.createRadialGradient(px, py, 0, px, py, s.r * 4);
           g.addColorStop(0, `rgba(${pal.star},${a})`);
@@ -176,6 +187,33 @@ const NebulaBackground = () => {
         ctx.fill();
       }
       ctx.globalAlpha = 1;
+
+      // Constellation: faint lines between stars gathered around the cursor.
+      // Alpha fades with each endpoint's distance to the cursor and with the
+      // pair's own length, so lines melt in and out as the pointer drifts.
+      if (!reduced && near.length > 1) {
+        near.sort((a, b) => a.d - b.d);
+        const pts = near.slice(0, 12);
+        ctx.lineWidth = 1;
+        for (let i = 0; i < pts.length; i++) {
+          for (let j = i + 1; j < pts.length; j++) {
+            const pd = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+            if (pd > LINK_R) continue;
+            const a =
+              0.22 *
+              (1 - pts[i].d / LINK_R) *
+              (1 - pts[j].d / LINK_R) *
+              (1 - pd / LINK_R) *
+              pal.starAlpha;
+            if (a < 0.01) continue;
+            ctx.strokeStyle = `rgba(${pal.star},${a})`;
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.stroke();
+          }
+        }
+      }
 
       // Shooting stars.
       if (!reduced) {
@@ -223,6 +261,14 @@ const NebulaBackground = () => {
     const onMove = (e: PointerEvent) => {
       mouse.tx = (e.clientX / w - 0.5) * 2;
       mouse.ty = (e.clientY / h - 0.5) * 2;
+      cursor.tx = e.clientX;
+      cursor.ty = e.clientY;
+      if (!cursor.active) {
+        // Snap on the first move so a line doesn't sweep in from off-screen.
+        cursor.active = true;
+        cursor.x = e.clientX;
+        cursor.y = e.clientY;
+      }
     };
 
     const onResize = () => {

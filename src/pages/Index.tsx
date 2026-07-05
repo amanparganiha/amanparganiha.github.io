@@ -6,6 +6,8 @@ import {
   Code,
   BarChart3,
   Clock,
+  Hand,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +18,7 @@ import GithubActivity from "@/components/GithubActivity";
 import GlassCard from "@/components/home/GlassCard";
 import SectionLabel from "@/components/home/SectionLabel";
 import StatusDot from "@/components/home/StatusDot";
-import { personalInfo } from "@/data/portfolio";
+import { personalInfo, projects } from "@/data/portfolio";
 import { getAllPosts, formatDate } from "@/lib/posts";
 
 const capabilities: { icon: LucideIcon; label: string; desc: string }[] = [
@@ -28,6 +30,7 @@ const capabilities: { icon: LucideIcon; label: string; desc: string }[] = [
 
 const Index = () => {
   const latestPosts = getAllPosts().slice(0, 3);
+  const airCanvas = projects.find((p) => p.demo === "/projects/air-canvas");
 
   return (
     <div>
@@ -190,6 +193,66 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Live demo — Air Canvas */}
+      {airCanvas && (
+        <section className="py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <FadeIn>
+              <SectionLabel index="03" className="mb-3">
+                Live Demo
+              </SectionLabel>
+            </FadeIn>
+            <FadeIn delay={0.05}>
+              <GlassCard hover className="relative overflow-hidden p-8 md:p-10">
+                {/* Soft glow accent in the card's corner */}
+                <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-[80px]" />
+                <div className="flex flex-col gap-8 md:flex-row md:items-center">
+                  <div className="flex-1">
+                    <div className="mb-4 flex flex-wrap items-center gap-2">
+                      <Badge className="gap-1 text-xs">
+                        <Sparkles size={11} /> Live
+                      </Badge>
+                      <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                        Runs in your browser · no install
+                      </span>
+                    </div>
+                    <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+                      Air Canvas
+                    </h2>
+                    <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                      {airCanvas.description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {airCanvas.techStack.slice(0, 4).map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded bg-muted/60 px-2 py-0.5 text-xs text-muted-foreground"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-7">
+                      <Button asChild size="lg">
+                        <Link to="/projects/air-canvas">
+                          Try it live <ArrowRight className="ml-1" size={16} />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                  {/* Decorative panel — same icon language as the capability cards */}
+                  <div className="hidden flex-shrink-0 md:block">
+                    <div className="flex h-40 w-40 items-center justify-center rounded-3xl border border-border/60 bg-card/40 ring-1 ring-primary/20">
+                      <Hand size={56} strokeWidth={1.25} className="text-primary" />
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
       {/* Live GitHub activity */}
       <GithubActivity />
 
@@ -198,7 +261,7 @@ const Index = () => {
         <section className="border-t border-border/50 py-20">
           <div className="mx-auto max-w-6xl px-6">
             <FadeIn>
-              <SectionLabel index="03" className="mb-3">
+              <SectionLabel index="04" className="mb-3">
                 Transmissions
               </SectionLabel>
             </FadeIn>
