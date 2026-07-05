@@ -1,21 +1,19 @@
 import { ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { prefersFinePointer } from "@/lib/utils";
 
 /**
  * Theme-aware glass surface — the single source of the home page's
  * "Cosmos / Observatory" card language. Translucent so the fixed
  * starfield (NebulaBackground) glows through in both light and dark.
  *
- * Hover cards also tilt gently toward the cursor. Tilt only engages on
- * fine-pointer devices without prefers-reduced-motion — touch and
- * reduced-motion users get exactly the old static card.
+ * Hover cards tilt gently toward the cursor and carry a faint radial
+ * glow under it. Both only engage on fine-pointer devices without
+ * prefers-reduced-motion — touch and reduced-motion users get exactly
+ * the old static card.
  */
 
 const MAX_TILT = 5; // degrees at the card's edge
-
-const canTilt = () =>
-  window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
-  !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const GlassCard = ({
   className = "",
@@ -38,12 +36,18 @@ const GlassCard = ({
   }
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!canTilt()) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const nx = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 .. 0.5
-    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    if (!prefersFinePointer()) return;
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const nx = x / rect.width - 0.5; // -0.5 .. 0.5
+    const ny = y / rect.height - 0.5;
     rotateY.set(nx * MAX_TILT * 2);
     rotateX.set(-ny * MAX_TILT * 2);
+    // Glow position — written straight to the element, no re-render.
+    el.style.setProperty("--gx", `${x}px`);
+    el.style.setProperty("--gy", `${y}px`);
   };
 
   const resetTilt = () => {
@@ -60,10 +64,19 @@ const GlassCard = ({
         base +
         // transition-colors (not -all): a CSS transform transition would
         // fight the spring-driven tilt framer-motion writes inline.
-        "transition-colors duration-300 hover:border-primary/40 hover:bg-card/60 " +
+        "group relative transition-colors duration-300 hover:border-primary/40 hover:bg-card/60 " +
         className
       }
     >
+      {/* Cursor glow — follows --gx/--gy set in onPointerMove. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(180px circle at var(--gx, 50%) var(--gy, 50%), hsl(var(--primary) / 0.08), transparent 70%)",
+        }}
+      />
       {children}
     </motion.div>
   );

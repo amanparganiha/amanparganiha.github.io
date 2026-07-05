@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ExternalLink, Github, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import FadeIn from "@/components/FadeIn";
 import Seo from "@/components/Seo";
-import { projects, type Project } from "@/data/portfolio";
+import { githubSocialCard, projects, type Project } from "@/data/portfolio";
+
+/** Custom image first, then GitHub's auto-generated repo card. */
+const thumbnail = (p: Project) =>
+  p.image ?? (p.github ? githubSocialCard(p.github) : undefined);
 
 const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI", "Reinforcement Learning", "Tools"] as const;
 
@@ -15,6 +19,22 @@ const Projects = () => {
   const [filter, setFilter] = useState<string>("All");
   const [selected, setSelected] = useState<Project | null>(null);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Deep link from the command palette: /projects?p=<id> opens that
+  // project's detail dialog.
+  useEffect(() => {
+    const id = searchParams.get("p");
+    if (!id) return;
+    const project = projects.find((x) => x.id === id);
+    if (project) setSelected(project);
+  }, [searchParams]);
+
+  const closeDialog = () => {
+    setSelected(null);
+    // Drop ?p= so closing really closes (and back button behaves).
+    if (searchParams.has("p")) setSearchParams({}, { replace: true });
+  };
 
   // A demo that points at an in-app route (starts with "/") is a live demo on
   // this site, so we navigate internally instead of opening a new tab.
@@ -61,9 +81,24 @@ const Projects = () => {
           {filtered.map((project, i) => (
             <FadeIn key={project.id} delay={i * 0.08}>
               <Card
-                className="cursor-pointer hover:border-primary/30 transition-all hover:shadow-md h-full flex flex-col"
+                className="group cursor-pointer hover:border-primary/30 transition-all hover:shadow-md h-full flex flex-col overflow-hidden"
                 onClick={() => setSelected(project)}
               >
+                {thumbnail(project) && (
+                  <div className="aspect-video overflow-hidden border-b border-border/50 bg-muted/30">
+                    <img
+                      src={thumbnail(project)}
+                      alt={`${project.title} preview`}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      onError={(e) => {
+                        // Hide the banner if the image can't load (e.g. a
+                        // repo went private) — the card still reads fine.
+                        e.currentTarget.parentElement!.style.display = "none";
+                      }}
+                    />
+                  </div>
+                )}
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-2 mb-2">
                     <Badge variant="secondary" className="w-fit text-xs">
@@ -101,7 +136,7 @@ const Projects = () => {
         </div>
 
         {/* Detail Dialog */}
-        <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
+        <Dialog open={!!selected} onOpenChange={closeDialog}>
           <DialogContent className="max-w-lg">
             {selected && (
               <>

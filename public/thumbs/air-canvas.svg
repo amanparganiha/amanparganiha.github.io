@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Air Canvas — draw in the air with your finger">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e1d"/>
+      <stop offset="1" stop-color="#04060c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#7c6cf0" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7c6cf0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b7cf5"/>
+      <stop offset="0.5" stop-color="#c4b9ff"/>
+      <stop offset="1" stop-color="#8b7cf5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- sparse stars -->
+  <g fill="#ffffff">
+    <circle cx="96" cy="88" r="1.6" opacity="0.55"/>
+    <circle cx="260" cy="190" r="1.1" opacity="0.35"/>
+    <circle cx="180" cy="470" r="1.4" opacity="0.45"/>
+    <circle cx="420" cy="90" r="1.2" opacity="0.4"/>
+    <circle cx="705" cy="70" r="1.6" opacity="0.5"/>
+    <circle cx="905" cy="140" r="1.1" opacity="0.35"/>
+    <circle cx="1080" cy="95" r="1.5" opacity="0.5"/>
+    <circle cx="1120" cy="330" r="1.2" opacity="0.4"/>
+    <circle cx="1010" cy="540" r="1.5" opacity="0.45"/>
+    <circle cx="330" cy="590" r="1.2" opacity="0.35"/>
+    <circle cx="620" cy="620" r="1.4" opacity="0.4"/>
+    <circle cx="80" cy="300" r="1.1" opacity="0.3"/>
+  </g>
+
+  <!-- an airy freehand stroke, as if just drawn -->
+  <path d="M 220 470 C 330 330, 470 300, 570 360 S 760 480, 880 380 S 1010 240, 960 200"
+        fill="none" stroke="url(#stroke)" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="960" cy="200" r="10" fill="#c4b9ff"/>
+  <circle cx="960" cy="200" r="22" fill="#8b7cf5" opacity="0.25"/>
+
+  <!-- hand (lucide "hand" outline) at the stroke's tip -->
+  <g transform="translate(895 205) scale(5.2)" fill="none" stroke="#b9adff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 11V6a2 2 0 0 0-4 0v5"/>
+    <path d="M14 10V4a2 2 0 0 0-4 0v2"/>
+    <path d="M10 10.5V6a2 2 0 0 0-4 0v8"/>
+    <path d="m7 15-1.76-1.76a2 2 0 0 0-2.83 2.82l3.6 3.6C7.5 21.14 9.2 22 12 22h2a8 8 0 0 0 8-8V7a2 2 0 0 0-4 0v5"/>
+  </g>
+
+  <!-- caption block -->
+  <text x="90" y="560" font-family="'Segoe UI', 'Inter', system-ui, sans-serif" font-size="26" letter-spacing="10" fill="#8b7cf5">[ LIVE DEMO ]</text>
+  <text x="90" y="620" font-family="'Segoe UI', 'Inter', system-ui, sans-serif" font-size="48" font-weight="600" fill="#eef0fa">Air Canvas — draw in the air</text>
+</svg>
