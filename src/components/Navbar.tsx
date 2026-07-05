@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, type LucideIcon } from "lucide-react";
+import { Menu, Search, X, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
+import { OPEN_PALETTE_EVENT } from "@/components/CommandPalette";
 
 type NavItem = { label: string; path: string; icon?: LucideIcon };
 
@@ -53,6 +54,14 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <button
+            onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+            className="ml-1 flex items-center gap-2 rounded-md border border-border/60 px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+            aria-label="Open command palette"
+          >
+            <Search size={13} />
+            <kbd className="font-mono text-[10px] tracking-wide">Ctrl K</kbd>
+          </button>
           <ThemeToggle />
         </div>
 

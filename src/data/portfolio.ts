@@ -181,6 +181,16 @@ export interface Project {
   demo?: string;
 }
 
+/**
+ * GitHub's auto-generated social-preview card for a repo (1200×600: repo
+ * name, description, stars). Used as the default project thumbnail when no
+ * custom image is set. Returns undefined for non-repo URLs.
+ */
+export function githubSocialCard(githubUrl: string): string | undefined {
+  const m = githubUrl.match(/github\.com\/([^/]+)\/([^/#?]+)/);
+  return m ? `https://opengraph.githubassets.com/1/${m[1]}/${m[2]}` : undefined;
+}
+
 export const projects: Project[] = [
   {
     id: "1",
@@ -366,6 +376,7 @@ export const projects: Project[] = [
     techStack: ["TypeScript", "React", "MediaPipe", "WebGL", "Canvas API", "Computer Vision"],
     results:
       "Runs in real time entirely in-browser with no server — try it live, no install required.",
+    image: "/thumbs/air-canvas.svg",
     demo: "/projects/air-canvas",
   },
   {

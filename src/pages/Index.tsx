@@ -16,6 +16,7 @@ import FadeIn from "@/components/FadeIn";
 import Seo from "@/components/Seo";
 import GithubActivity from "@/components/GithubActivity";
 import GlassCard from "@/components/home/GlassCard";
+import Magnetic from "@/components/home/Magnetic";
 import SectionLabel from "@/components/home/SectionLabel";
 import StatusDot from "@/components/home/StatusDot";
 import { personalInfo, projects } from "@/data/portfolio";
@@ -93,14 +94,18 @@ const Index = () => {
 
               <FadeIn delay={0.25}>
                 <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <Button asChild size="lg">
-                    <Link to="/projects">
-                      View Projects <ArrowRight className="ml-1" size={16} />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg">
-                    <Link to="/resume">Resume</Link>
-                  </Button>
+                  <Magnetic>
+                    <Button asChild size="lg">
+                      <Link to="/projects">
+                        View Projects <ArrowRight className="ml-1" size={16} />
+                      </Link>
+                    </Button>
+                  </Magnetic>
+                  <Magnetic>
+                    <Button asChild variant="outline" size="lg">
+                      <Link to="/resume">Resume</Link>
+                    </Button>
+                  </Magnetic>
                 </div>
               </FadeIn>
             </div>
