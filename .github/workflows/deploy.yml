@@ -24,11 +24,22 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Every action here is pinned to a major that runs on Node 24. The v4/v3
+      # set ran on Node 20, which the runners now force onto 24 anyway and warn
+      # about on every run — the warning was describing a substitution that had
+      # already happened, so this makes the file say what actually runs.
+      #
+      # upload-pages-artifact v5 is the one that matters beyond the warning: it
+      # is what pulls in upload-artifact v7. Nothing in this workflow references
+      # upload-artifact directly, so it could not be fixed from here any other
+      # way. Its v5 also stops archiving dotfiles by default; dist/ has none
+      # (public/ is clean and vite build emits no manifest), so the default
+      # stands and no include-hidden-files is needed.
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 20
 
@@ -39,13 +50,13 @@ jobs:
         run: npm run build
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
