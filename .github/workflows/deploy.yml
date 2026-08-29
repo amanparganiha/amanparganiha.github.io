@@ -9,6 +9,17 @@ permissions:
   pages: write
   id-token: write
 
+# GitHub Pages accepts one deployment at a time. Without this, two pushes a
+# minute apart race: the second run builds fine, then the Pages API rejects it
+# with a 400 because the first is still deploying. Queueing them means a burst
+# of commits ends in one deploy of the final state instead of a red run.
+#
+# `cancel-in-progress: false` on purpose — cancelling mid-deploy is what leaves
+# the site serving a half-published build.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
