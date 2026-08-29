@@ -41,7 +41,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-          node-version: 20
+          # 22, not 24: it is what @types/node is pinned to, so the types the
+          # build checks against and the runtime it runs on agree.
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
