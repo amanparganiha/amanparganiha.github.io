@@ -10,7 +10,7 @@ export const personalInfo = {
   email: "aman.parganiha.16@gmail.com",
   location: "India",
   about:
-    "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur and a Robotics Programming Intern at Janyu Tech, where I own backend delivery for MyFactory OS, a manufacturing execution system for industrial-robotics production. I build LLM applications end to end — RAG pipelines, agentic workflows, and prompt-to-app generation — and my M.Tech thesis, LiveJEPA, explores real-time vision-language captioning. My focus is on clean software architecture and production-ready AI.",
+    "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur and a Robotics Programming Intern at Janyu Tech, where I own backend delivery for MyFactory OS, a manufacturing execution system for industrial-robotics production. I build LLM applications end to end RAG pipelines, agentic workflows, and prompt-to-app generation and my M.Tech thesis, LiveJEPA, explores real-time vision-language captioning. My focus is on clean software architecture and production-ready AI.",
 
   social: {
     github: "https://github.com/amanparganiha",
