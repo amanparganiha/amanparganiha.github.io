@@ -17,7 +17,6 @@ import Seo from "@/components/Seo";
 import GithubActivity from "@/components/GithubActivity";
 import GlassCard from "@/components/home/GlassCard";
 import Magnetic from "@/components/home/Magnetic";
-import SectionLabel from "@/components/home/SectionLabel";
 import StatusDot from "@/components/home/StatusDot";
 import { personalInfo, projects } from "@/data/portfolio";
 import { getAllPosts, formatDate } from "@/lib/posts";
@@ -31,6 +30,7 @@ const capabilities: { icon: LucideIcon; label: string; desc: string }[] = [
 
 const Index = () => {
   const latestPosts = getAllPosts().slice(0, 3);
+  const featured = projects.filter((p) => p.featured);
   const airCanvas = projects.find((p) => p.demo === "/projects/air-canvas");
 
   return (
@@ -137,40 +137,65 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <FadeIn>
-            <SectionLabel index="01" className="mb-6">
-              Telemetry
-            </SectionLabel>
-          </FadeIn>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {personalInfo.stats.map((stat, i) => (
-              <FadeIn key={stat.label} delay={i * 0.08}>
-                <GlassCard hover className="flex h-full flex-col justify-between p-5 md:p-6">
-                  <p className="font-mono text-3xl font-medium tracking-tight text-primary md:text-4xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {stat.label}
-                  </p>
-                </GlassCard>
-              </FadeIn>
-            ))}
+      {/* Selected projects — a short teaser; the full list lives on /projects */}
+      {featured.length > 0 && (
+        <section className="py-16">
+          <div className="mx-auto max-w-6xl px-6">
+            <FadeIn>
+              <div className="mb-8 flex items-center justify-between">
+                <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+                  Selected projects
+                </h2>
+                <Button asChild variant="ghost" size="sm">
+                  <Link to="/projects">
+                    All {projects.length} projects <ArrowRight size={14} className="ml-1" />
+                  </Link>
+                </Button>
+              </div>
+            </FadeIn>
+            <div className="grid gap-6 md:grid-cols-3">
+              {featured.map((project, i) => (
+                <FadeIn key={project.id} delay={i * 0.08}>
+                  <Link to={`/projects?p=${project.id}`} className="block h-full">
+                    <GlassCard hover className="flex h-full flex-col p-6">
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        {/* Primary label only, so all three cards keep a one-row header */}
+                        <Badge variant="secondary" className="text-xs">
+                          {project.categories[0]}
+                        </Badge>
+                        {project.demo && (
+                          <Badge className="gap-1 text-xs">
+                            <Sparkles size={11} /> Live
+                          </Badge>
+                        )}
+                      </div>
+                      <h3 className="mb-2 font-semibold tracking-tight">{project.title}</h3>
+                      <p className="line-clamp-3 text-sm text-muted-foreground">
+                        {project.description}
+                      </p>
+                      <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+                        {project.techStack.slice(0, 4).map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded bg-muted/60 px-2 py-0.5 text-xs text-muted-foreground"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </GlassCard>
+                  </Link>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* About */}
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
           <FadeIn>
-            <SectionLabel index="02" className="mb-3">
-              Field Notes
-            </SectionLabel>
-          </FadeIn>
-          <FadeIn delay={0.05}>
             <h2 className="mb-10 text-2xl font-semibold tracking-tight md:text-3xl">
               About
             </h2>
@@ -203,11 +228,6 @@ const Index = () => {
         <section className="py-20">
           <div className="mx-auto max-w-6xl px-6">
             <FadeIn>
-              <SectionLabel index="03" className="mb-3">
-                Live Demo
-              </SectionLabel>
-            </FadeIn>
-            <FadeIn delay={0.05}>
               <GlassCard hover className="relative overflow-hidden p-8 md:p-10">
                 {/* Soft glow accent in the card's corner */}
                 <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-[80px]" />
@@ -266,11 +286,6 @@ const Index = () => {
         <section className="border-t border-border/50 py-20">
           <div className="mx-auto max-w-6xl px-6">
             <FadeIn>
-              <SectionLabel index="04" className="mb-3">
-                Transmissions
-              </SectionLabel>
-            </FadeIn>
-            <FadeIn delay={0.05}>
               <div className="mb-8 flex items-center justify-between">
                 <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
                   Latest writing

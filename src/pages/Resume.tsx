@@ -1,16 +1,22 @@
-import { Download, Briefcase, GraduationCap, Award, ExternalLink } from "lucide-react";
+import { Download, Briefcase, GraduationCap, Award, ExternalLink, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import FadeIn from "@/components/FadeIn";
 import Seo from "@/components/Seo";
-import { experiences, education, skillCategories, certifications } from "@/data/portfolio";
+import {
+  experiences,
+  education,
+  skillCategories,
+  achievements,
+  certifications,
+} from "@/data/portfolio";
 
 const Resume = () => {
   return (
     <div className="py-16 md:py-24">
       <Seo
         title="Resume"
-        description="Experience, education, skills, and certifications of Aman Parganiha, AI & Software Engineer."
+        description="Experience, education, skills, achievements, and certifications of Aman Parganiha, AI & Software Engineer."
         path="/resume"
       />
       <div className="mx-auto max-w-4xl px-6">
@@ -42,7 +48,12 @@ const Resume = () => {
                   <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-primary" />
                   <p className="text-xs text-muted-foreground mb-1">{exp.period}</p>
                   <h3 className="font-semibold">{exp.role}</h3>
-                  <p className="text-sm text-primary mb-2">{exp.company}</p>
+                  <p className="text-sm text-primary mb-2">
+                    {exp.company}
+                    {exp.location && (
+                      <span className="text-muted-foreground"> · {exp.location}</span>
+                    )}
+                  </p>
                   <p className="text-sm text-muted-foreground mb-2">{exp.description}</p>
                   {exp.highlights.length > 0 && (
                     <ul className="space-y-1">
@@ -106,6 +117,41 @@ const Resume = () => {
               </FadeIn>
             ))}
           </div>
+        </section>
+
+        {/* Achievements */}
+        <section className="mb-16">
+          <FadeIn>
+            <div className="flex items-center gap-2 mb-6">
+              <Trophy size={20} className="text-primary" />
+              <h2 className="text-xl font-semibold">Achievements</h2>
+            </div>
+          </FadeIn>
+          <ul className="space-y-2">
+            {achievements.map((item, i) => (
+              <FadeIn key={item.title} delay={i * 0.1}>
+                <li className="flex items-start gap-2 text-sm">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <span className="font-medium text-foreground">{item.title}</span>
+                    {item.detail && (
+                      <span className="text-muted-foreground">— {item.detail}</span>
+                    )}
+                    {item.url && (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                      >
+                        View profile <ExternalLink size={12} />
+                      </a>
+                    )}
+                  </span>
+                </li>
+              </FadeIn>
+            ))}
+          </ul>
         </section>
 
         {/* Certifications */}

@@ -7,16 +7,29 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import FadeIn from "@/components/FadeIn";
 import Seo from "@/components/Seo";
-import { githubSocialCard, projects, type Project } from "@/data/portfolio";
+import {
+  githubSocialCard,
+  projectCategories,
+  projects,
+  type Project,
+  type ProjectCategory,
+} from "@/data/portfolio";
 
 /** Custom image first, then GitHub's auto-generated repo card. */
 const thumbnail = (p: Project) =>
   p.image ?? (p.github ? githubSocialCard(p.github) : undefined);
 
-const categories = ["All", "NLP", "Computer Vision", "Data Analysis", "MLOps", "Generative AI", "Reinforcement Learning", "Tools"] as const;
+// A project can carry several labels, so it shows up under each of them.
+const filters: { label: "All" | ProjectCategory; count: number }[] = [
+  { label: "All", count: projects.length },
+  ...projectCategories.map((c) => ({
+    label: c,
+    count: projects.filter((p) => p.categories.includes(c)).length,
+  })),
+];
 
 const Projects = () => {
-  const [filter, setFilter] = useState<string>("All");
+  const [filter, setFilter] = useState<"All" | ProjectCategory>("All");
   const [selected, setSelected] = useState<Project | null>(null);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,7 +53,7 @@ const Projects = () => {
   // this site, so we navigate internally instead of opening a new tab.
   const isInternal = (url?: string) => !!url && url.startsWith("/");
 
-  const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const filtered = filter === "All" ? projects : projects.filter((p) => p.categories.includes(filter));
 
   return (
     <div className="py-16 md:py-24">
@@ -53,24 +66,29 @@ const Projects = () => {
         <FadeIn>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Projects</h1>
           <p className="text-muted-foreground mb-8 max-w-xl">
-            A selection of ML/AI projects I've built — from research prototypes to production systems.
+            AI/ML systems, research, and production backends I've built. Filter by label to see
+            the work in each area.
           </p>
         </FadeIn>
 
         {/* Filters */}
         <FadeIn delay={0.1}>
           <div className="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat) => (
+            {filters.map(({ label, count }) => (
               <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  filter === cat
+                key={label}
+                onClick={() => setFilter(label)}
+                aria-pressed={filter === label}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  filter === label
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 }`}
               >
-                {cat}
+                {label}
+                <span className={`text-xs tabular-nums ${filter === label ? "opacity-80" : "opacity-60"}`}>
+                  {count}
+                </span>
               </button>
             ))}
           </div>
@@ -79,7 +97,8 @@ const Projects = () => {
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
-            <FadeIn key={project.id} delay={i * 0.08}>
+            // Stagger within a row only, so cards far down the list don't lag.
+            <FadeIn key={project.id} delay={(i % 3) * 0.08}>
               <Card
                 className="group cursor-pointer hover:border-primary/30 transition-all hover:shadow-md h-full flex flex-col overflow-hidden"
                 onClick={() => setSelected(project)}
@@ -100,10 +119,12 @@ const Projects = () => {
                   </div>
                 )}
                 <CardHeader className="pb-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary" className="w-fit text-xs">
-                      {project.category}
-                    </Badge>
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    {project.categories.map((c) => (
+                      <Badge key={c} variant="secondary" className="w-fit text-xs">
+                        {c}
+                      </Badge>
+                    ))}
                     {project.demo && (
                       <Badge className="w-fit text-xs gap-1">
                         <Sparkles size={11} /> Live
@@ -141,9 +162,13 @@ const Projects = () => {
             {selected && (
               <>
                 <DialogHeader>
-                  <Badge variant="secondary" className="w-fit text-xs mb-2">
-                    {selected.category}
-                  </Badge>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {selected.categories.map((c) => (
+                      <Badge key={c} variant="secondary" className="w-fit text-xs">
+                        {c}
+                      </Badge>
+                    ))}
+                  </div>
                   <DialogTitle>{selected.title}</DialogTitle>
                   <DialogDescription className="pt-2">
                     {selected.longDescription}

@@ -86,7 +86,7 @@ const CommandPalette = () => {
           {projects.map((project) => (
             <CommandItem
               key={project.id}
-              value={`${project.title} ${project.category}`}
+              value={`${project.title} ${project.categories.join(" ")}`}
               onSelect={() =>
                 run(() =>
                   navigate(

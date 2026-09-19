@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="LiveJEPA — real-time vision-language captioning">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0e1d"/>
+      <stop offset="1" stop-color="#04060c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#7c6cf0" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7c6cf0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1f3a"/>
+      <stop offset="1" stop-color="#0d1124"/>
+    </linearGradient>
+    <linearGradient id="caption" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b7cf5"/>
+      <stop offset="1" stop-color="#c4b9ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- sparse stars -->
+  <g fill="#ffffff">
+    <circle cx="96" cy="70" r="1.6" opacity="0.55"/>
+    <circle cx="300" cy="46" r="1.1" opacity="0.35"/>
+    <circle cx="520" cy="96" r="1.2" opacity="0.4"/>
+    <circle cx="760" cy="52" r="1.6" opacity="0.5"/>
+    <circle cx="1080" cy="80" r="1.5" opacity="0.5"/>
+    <circle cx="1130" cy="330" r="1.2" opacity="0.4"/>
+    <circle cx="1040" cy="520" r="1.5" opacity="0.45"/>
+    <circle cx="640" cy="470" r="1.4" opacity="0.4"/>
+    <circle cx="60" cy="380" r="1.1" opacity="0.3"/>
+  </g>
+
+  <!-- a stack of streaming video frames -->
+  <g stroke="#8b7cf5" stroke-width="2">
+    <rect x="150" y="150" width="280" height="190" rx="18" fill="url(#frame)" opacity="0.35"/>
+    <rect x="130" y="170" width="280" height="190" rx="18" fill="url(#frame)" opacity="0.6"/>
+    <rect x="110" y="190" width="280" height="190" rx="18" fill="url(#frame)"/>
+  </g>
+  <!-- scene inside the front frame -->
+  <path d="M 130 350 L 200 280 L 245 320 L 300 255 L 370 350 Z" fill="#8b7cf5" opacity="0.35"/>
+  <circle cx="330" cy="235" r="16" fill="#c4b9ff" opacity="0.7"/>
+  <!-- live indicator -->
+  <circle cx="138" cy="216" r="6" fill="#34d399"/>
+  <text x="152" y="222" font-family="'Segoe UI', 'Inter', system-ui, sans-serif" font-size="16" letter-spacing="3" fill="#b9adff">LIVE</text>
+
+  <!-- encoder → latent embedding -->
+  <path d="M 420 285 L 520 285" stroke="#8b7cf5" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 510 275 L 522 285 L 510 295" fill="none" stroke="#8b7cf5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <g fill="#b9adff">
+    <circle cx="570" cy="195" r="9" opacity="0.35"/>
+    <circle cx="570" cy="225" r="9" opacity="0.8"/>
+    <circle cx="570" cy="255" r="9" opacity="0.5"/>
+    <circle cx="570" cy="285" r="9" opacity="0.95"/>
+    <circle cx="570" cy="315" r="9" opacity="0.45"/>
+    <circle cx="570" cy="345" r="9" opacity="0.7"/>
+    <circle cx="570" cy="375" r="9" opacity="0.3"/>
+  </g>
+  <rect x="545" y="172" width="50" height="226" rx="25" fill="none" stroke="#8b7cf5" stroke-width="2" opacity="0.5"/>
+
+  <!-- predictor → caption tokens -->
+  <path d="M 620 285 L 720 285" stroke="#8b7cf5" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 710 275 L 722 285 L 710 295" fill="none" stroke="#8b7cf5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <rect x="760" y="225" width="300" height="26" rx="13" fill="url(#caption)" opacity="0.9"/>
+  <rect x="760" y="272" width="230" height="26" rx="13" fill="#8b7cf5" opacity="0.45"/>
+  <rect x="760" y="319" width="150" height="26" rx="13" fill="#8b7cf5" opacity="0.25"/>
+  <rect x="922" y="317" width="5" height="30" rx="2.5" fill="#c4b9ff"/>
+
+  <!-- caption block -->
+  <text x="90" y="560" font-family="'Segoe UI', 'Inter', system-ui, sans-serif" font-size="26" letter-spacing="10" fill="#8b7cf5">[ RESEARCH · M.TECH THESIS ]</text>
+  <text x="90" y="620" font-family="'Segoe UI', 'Inter', system-ui, sans-serif" font-size="48" font-weight="600" fill="#eef0fa">LiveJEPA — real-time video captioning</text>
+</svg>

@@ -24,8 +24,9 @@ npx tsc -p tsconfig.app.json --noEmit   # typecheck (vite build does not)
 
 ## Content
 
-Nearly all site copy lives in **`src/data/portfolio.ts`** (bio, stats, experience,
-education, skills, certifications, projects, open-source highlights).
+Nearly all site copy lives in **`src/data/portfolio.ts`** (bio, experience,
+education, skills, achievements, certifications, projects with their filter
+labels, open-source highlights).
 
 Blog posts are markdown files in **`src/content/posts/`** — drop in a new `.md`
 file with frontmatter and it is published automatically on the next push. See
