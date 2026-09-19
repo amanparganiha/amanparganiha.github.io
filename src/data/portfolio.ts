@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Aman Parganiha",
   title: "AI & Software Engineer",
   tagline: "Building AI systems and scalable software that solve real-world problems.",
-  status: "Robotics Programming Intern @ Janyu Technologies",
+  status: "Robotics Programming Intern @ Janyu Tech",
   heroHeadline: "I build AI systems that ship.",
   heroSub:
     "AI & Software Engineer — turning research-grade ML like RAG pipelines and multimodal models into production-ready software with clean, scalable architecture.",
@@ -10,7 +10,7 @@ export const personalInfo = {
   email: "aman.parganiha.16@gmail.com",
   location: "India",
   about:
-    "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur and a Robotics Programming Intern at Janyu Technologies, where I own backend delivery for MyFactory OS, a manufacturing execution system for industrial-robotics production. I build LLM applications end to end — RAG pipelines, agentic workflows, and prompt-to-app generation — and my M.Tech thesis, LiveJEPA, explores real-time vision-language captioning. My focus is on clean software architecture and production-ready AI.",
+    "I'm an M.Tech CSE (AI/ML) student at IIIT Naya Raipur and a Robotics Programming Intern at Janyu Tech, where I own backend delivery for MyFactory OS, a manufacturing execution system for industrial-robotics production. I build LLM applications end to end — RAG pipelines, agentic workflows, and prompt-to-app generation — and my M.Tech thesis, LiveJEPA, explores real-time vision-language captioning. My focus is on clean software architecture and production-ready AI.",
 
   social: {
     github: "https://github.com/amanparganiha",
@@ -32,7 +32,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     role: "Robotics Programming Intern",
-    company: "Janyu Technologies",
+    company: "Janyu Tech",
     location: "Mumbai, Maharashtra",
     period: "Aug 2026 — Present",
     description:
