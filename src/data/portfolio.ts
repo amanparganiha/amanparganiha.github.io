@@ -5,7 +5,7 @@ export const personalInfo = {
   status: "Robotics Programming Intern @ Janyu Tech",
   heroHeadline: "I build AI systems that ship.",
   heroSub:
-    "AI & Software Engineer — turning research-grade ML like RAG pipelines and multimodal models into production-ready software with clean, scalable architecture.",
+    "AI & Software Engineer turning research-grade ML like RAG pipelines and multimodal models into production-ready software with clean, scalable architecture.",
   photo: "/profile-480.webp",
   email: "aman.parganiha.16@gmail.com",
   location: "India",
